@@ -25,52 +25,40 @@
        
         <li class="breadcrumb-item active">LAPORAN SISWA PINDAH SEKOLAH</li>
       </ol>
-
-                <form method="post" action="cetaklaporan.php">
-<table width="494" border="0" align="center">
-<tr>
-                            <tr>
-    <td width="150">Laporan</td>
-    <td width="10">:</td>
-    <td><select name="bulan" required>
-    <option value="01">Januari</option>
-    <option value="02">Februari</option>
-    <option value="03">Maret</option>
-    <option value="04">April</option>
-    <option value="05">Mei</option>
-    <option value="06">Juni</option>
-    <option value="07">Juli</option>
-    <option value="08">Agustus</option>
-    <option value="09">September</option>
-    <option value="10">Oktober</option>
-    <option value="11">November</option>
-    <option value="12">Desember</option>
-    </select>
-    <select name="tahun">
-    <?php
-    include('koneksi.php');
-    $mulai= date('Y') - 50;
-    for($i = $mulai;$i<$mulai + 100;$i++){
-    $sel = $i == date('Y') ? ' selected="selected"' : '';
-    echo '<option value="'.$i.'"'.$sel.'>'.$i.'</option>';
-        }
-        ?>
-</select>
-
-  </tr>
-  <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td><input name="Submit" type="submit" value="CARI"></td>
-
-        
-      <nav>
-        <ul>
-            <td>&nbsp;</td>
+          <form method="GET" action="cetaklaporan.php" >
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Tempat/Tgl Lahir</th>
+                    <th>NISN</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+            <?php
+                    include("koneksi.php");
+                    $no=1;
+                    $query = mysqli_query($koneksi,"SELECT * FROM tb_pindah");
+                        if(mysqli_num_rows($query) == 0){ 
+                          echo '<tr><td colspan="7">Tidak ada data!</td></tr>';
+                        }else{
+                          while($data = mysqli_fetch_array($query)){?>
+              <tr>
+                <td><?php echo $no;?></td>
+                <td><?php echo $data['nama'];?></td>
+                <td><?php echo $data['ttl'];?></td>
+                <td><?php echo $data['nisn'];?></td>
                 <td>
-            <a href="home.php" class="btn btn-sm btn-danger">Kembali</a></td>
-            
-        </ul>
-        </nav>
+                  <a class="btn btn-success btn-sm" href="cetaklaporan.php?id=<?php echo $data['id']; ?>">Cetak</a>
+                </td>
+              </tr>
+              <?php $no++;}}?>
+              </tbody>
+            </table>
+          </form>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">

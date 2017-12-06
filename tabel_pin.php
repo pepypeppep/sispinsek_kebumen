@@ -45,13 +45,13 @@
 			<?php
 			include("koneksi.php");
 			$no=1;
-			$query = mysql_query("SELECT * FROM tb_pindah");
-					if(mysql_num_rows($query) == 0){	
+			$query = mysqli_query("SELECT * FROM tb_pindah");
+					if(mysqli_num_rows($query) == 0){	
 		
 			echo '<tr><td colspan="7">Tidak ada data!</td></tr>';
 			
 		}else{
-					while($data = mysql_fetch_array($query)){
+					while($data = mysqli_fetch_array($query)){
 					
 				echo '<tr>';
 				echo	'<td>'.$no.'</td>';

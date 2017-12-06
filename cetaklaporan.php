@@ -41,20 +41,10 @@
 				<br>
 				<div id="dataDiri">
 				<?php
-					//mulai proses tambah data
-					//cek dahulu, jika tombol tambah di klik
-					if(isset($_POST['Submit'])){
-						//inlcude atau memasukkan file koneksi ke database
-						include('koneksi.php');
-						date_default_timezone_set('Asia/Jakarta');
-						$query = mysqli_query($koneksi,"select * from tb_pindah") or die(mysql_error());
-						if(mysqli_num_rows($query) == 0){	//ini artinya jika data hasil query di atas kosong
-								//jika data kosong, maka akan menampilkan row kosong
-								echo '<tr><td colspan="7">Tidak ada data!</td></tr>';
-						}else{	//else ini artinya jika data hasil query ada (data diu database tidak kosong)
-								//jika data tidak kosong, maka akan melakukan perulangan while
-								$data = mysqli_fetch_assoc($query)
-					?>
+					$id = $_GET['id'];
+                    include("koneksi.php");
+                    $query = mysqli_query($koneksi,"SELECT * from tb_pindah where id=$id");
+                    while($data = mysqli_fetch_array($query)){?>
 					<table>
 						<tr>
 							<td>1. Nama</td>
@@ -108,7 +98,6 @@
 						</tr>
 					</table>
 					<?php
-						}
 					}
 					?>
 				</div>
@@ -120,8 +109,7 @@
 					<h4><u>Drs. H. SUDIRMAN</u></h4>
 					<p class="ketTtd">Pembina<br>NIP. 19620113 199003 1 003
 					</p>
-				</div>
-								
+				</div>		
 		</div>
 		</center>
 	</body>
