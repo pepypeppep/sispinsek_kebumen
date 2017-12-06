@@ -3,6 +3,23 @@
 		<title>Cetak Laporan</title>
 		<link rel="stylesheet" href="css/style.css" type="text/css" />
 		<meta http-equiv="Content-Type" content="text/html; charset-iso-8859-1" />
+		<style>
+			table, td, tr {
+			    text-align: left;
+			}
+
+			table {
+			    border-collapse: collapse;
+			    width: 100%;
+			}
+
+			tr, td {
+			    padding: 15px;
+			}
+			td{
+				vertical-align: top;
+			}
+		</style>
 	</head>
 	<body>
 		<center>
@@ -23,42 +40,77 @@
 				<p class="keterangan">Tentang Surat Keterangan/Rekomendasi, dengan ini Kepala Dinas Pendidikan Kabupaten Kebumen menerangkan bahwa :</p>
 				<br>
 				<div id="dataDiri">
-					<div id="tagName">
-						<span>1. Nama</span>
-						<span>2. Tempat dan tanggal lahir</span>
-						<span>3. Nomor Induk/ NISN</span>
-						<span>4. Asal Sekolah</span>
-						<span>5. Kelas</span>
-						<span>6. Nama orang tua</span>
-						<span>7. Keperluan</span><br><br><br>
-						<span>8. Alasan mendaftar / pindah pada sekolah tersebut</span>
-						<span>9. Yang bersangkutan memiliki</span>
-						<span>10. Keterangan</span>
-					</div>
-					<div id="separator">
-						<span>:</span>
-						<span>:</span>
-						<span>:</span>
-						<span>:</span>
-						<span>:</span>
-						<span>:</span>
-						<span>:</span><br><br><br>
-						<span>:</span>
-						<span>:</span>
-						<span>:</span>
-					</div>
-					<div id="isiData">
-						<span>Lorem Ipsum</span>
-						<span>Lorem Ipsum</span>
-						<span>Lorem Ipsum</span>
-						<span>Lorem Ipsum</span>
-						<span>Lorem Ipsum</span>
-						<span>Lorem Ipsum</span>
-						<span>Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum</span>
-						<span>Lorem Ipsum</span>
-						<span>Lorem Ipsum</span>
-						<span>Lorem Ipsum</span><br>
-					</div>
+				<?php
+					//mulai proses tambah data
+					//cek dahulu, jika tombol tambah di klik
+					if(isset($_POST['Submit'])){
+						//inlcude atau memasukkan file koneksi ke database
+						include('koneksi.php');
+						date_default_timezone_set('Asia/Jakarta');
+						$query = mysqli_query($koneksi,"select * from tb_pindah") or die(mysql_error());
+						if(mysqli_num_rows($query) == 0){	//ini artinya jika data hasil query di atas kosong
+								//jika data kosong, maka akan menampilkan row kosong
+								echo '<tr><td colspan="7">Tidak ada data!</td></tr>';
+						}else{	//else ini artinya jika data hasil query ada (data diu database tidak kosong)
+								//jika data tidak kosong, maka akan melakukan perulangan while
+								$data = mysqli_fetch_assoc($query)
+					?>
+					<table>
+						<tr>
+							<td>1. Nama</td>
+							<td> : </td>
+							<td><?php echo $data['nama']; ?></td>
+						</tr>
+						<tr>
+							<td>2. Tempat dan tanggal lahir</td>
+							<td> : </td>
+							<td><?php echo $data['ttl']; ?></td>
+						</tr>
+						<tr>
+							<td>3. Nomor Induk/ NISN</td>
+							<td> : </td>
+							<td><?php echo $data['nisn']; ?></td>
+						</tr>
+						<tr>
+							<td>4. Asal Sekolah</td>
+							<td> : </td>
+							<td><?php echo $data['asal']; ?></td>
+						</tr>
+						<tr>
+							<td>5. Kelas</td>
+							<td> : </td>
+							<td><?php echo $data['kelas']; ?></td>
+						</tr>
+						<tr>
+							<td>6. Nama orang tua</td>
+							<td> : </td>
+							<td><?php echo $data['ortu']; ?></td>
+						</tr>
+						<tr>
+							<td>7. Keperluan</td>
+							<td> : </td>
+							<td><?php echo $data['keperluan']; ?></td>
+						</tr>
+						<tr>
+							<td>8. Alasan mendaftar / pindah pada sekolah tersebut</td>
+							<td> : </td>
+							<td><?php echo $data['alasan']; ?></td>
+						</tr>
+						<tr>
+							<td>9. Yang bersangkutan memiliki</td>
+							<td> : </td>
+							<td><?php echo $data['memiliki']; ?></td>
+						</tr>
+						<tr>
+							<td>10. Keterangan</td>
+							<td> : </td>
+							<td><?php echo $data['keterangan']; ?></td>
+						</tr>
+					</table>
+					<?php
+						}
+					}
+					?>
 				</div>
 				<p class="keterangan">Demikian Surat Keterangan ini dikeluarkan untuk dapat dipergunakan sebagaimana mestinya.</p>
 				<div id="ttd">
@@ -69,34 +121,7 @@
 					<p class="ketTtd">Pembina<br>NIP. 19620113 199003 1 003
 					</p>
 				</div>
-				<?php
-				//mulai proses tambah data
-				//cek dahulu, jika tombol tambah di klik
-				if(isset($_POST['Submit'])){
-					//inlcude atau memasukkan file koneksi ke database
-					include('koneksi.php');
-					date_default_timezone_set('Asia/Jakarta');
-					$query = mysql_query("select * from tb_pindah") or die(mysql_error());
-					if(mysql_num_rows($query) == 0){	//ini artinya jika data hasil query di atas kosong
-							//jika data kosong, maka akan menampilkan row kosong
-							echo '<tr><td colspan="7">Tidak ada data!</td></tr>';
-					}else{	//else ini artinya jika data hasil query ada (data diu database tidak kosong)
-							//jika data tidak kosong, maka akan melakukan perulangan while
-							$no = 1;	//membuat variabel $no untuk membuat nomor urut
-							while($data = mysql_fetch_assoc($query)){	//perulangan while dg membuat variabel $data yang akan mengambil data di database
-								//menampilkan row dengan data di database
-								echo '<tr>';
-									echo '<td bgcolor="#FFFFFF">'.$data['nama'].'</td>';	//menampilkan data nama dari database
-									echo '<td  bgcolor="#FFFFFF"> '.$data['nisn'].'</a></td>';
-									echo '<td align="center"  bgcolor="#FFFFFF">'.$data['asal'].'</td>';
-									echo '<td align="center"  bgcolor="#FFFFFF">'.$data['kelas'].'</td>';
-									echo '<td align="center"  bgcolor="#FFFFFF">'.$data['keperluan'].'</td>';
-								$no++;	//menambah jumlah nomor urut setiap row	
-							}
 								
-					}
-				}
-				?>
 		</div>
 		</center>
 	</body>

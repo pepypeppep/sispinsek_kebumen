@@ -5,8 +5,8 @@
    $username=$_POST['username']; //tangkap data yg di input dari form login input username
    $password=$_POST['password']; //tangkap data yg di input dari form login input password
 
-   $query=mysql_query("select * From tb_login where username='$username' and password='$password'"); //melakukan pengampilan data dari database untuk di cocokkan
-   $xxx=mysql_num_rows($query); //melakukan pencocokan
+   $query=mysqli_query($koneksi,"select * From tb_login where username='$username' and password='$password'"); //melakukan pengampilan data dari database untuk di cocokkan
+   $xxx=mysqli_num_rows($query); //melakukan pencocokan
 
    if($xxx==TRUE){ // melakukan pemeriksaan kecocokan dengan percabangan.
       $_SESSION['username']=$username; //jika cocok, buat session dengan nama sesuai dengan username
