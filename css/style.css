@@ -1,0 +1,67 @@
+#wrapper{
+	width: 8.5in;
+	height: 11.0in;
+}
+img{
+	height: 80px;
+	width: 70px;
+	float: left;
+	margin: 30px 0px 0px 20px;
+}
+#textKop{
+	display: inline-block;
+	position: relative;
+}
+#pemkabkeb{
+	font-size: 25px;
+	margin-bottom: -15px;
+}
+#jalan{
+	font-size: 14px;
+	margin-top: -15px;
+}
+hr{
+	height: 3px;
+	background-color: #000;
+}
+#nomor{
+	margin: -20px 0px 30px 0px;
+	font-size: 18px;
+}
+.keterangan{
+	text-align: justify;
+	font-size: 18px;
+	width: 8.5in;
+}
+#dataDiri{
+	margin-left: 50px;
+}
+span{
+	display: block;
+	padding: 10px 0px 10px 0px;
+}
+#tagName{
+	float: left;
+	text-align: left;
+}
+#separator{
+	text-align: left;
+	float: left;
+	margin: 0px 20px 0px 20px;
+}
+#isiData{
+	text-align: left;
+	margin-left: 20px;
+	width: 600px;
+}
+#ttd{
+	margin-top: -20px;
+	float: right;
+}
+.ketTtd{
+	width: 200px;
+	font-size: 14px;
+}
+h4{
+	margin-bottom: -15px;
+}
